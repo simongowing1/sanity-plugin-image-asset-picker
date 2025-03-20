@@ -43,7 +43,9 @@
     "watch": "pkg-utils watch --strict"
   },
   "dependencies": {
-    "@sanity/incompatible-plugin": "^1.0.5"
+    "@sanity/incompatible-plugin": "^1.0.5",
+    "@sanity/ui": "^2.15.7",
+    "phosphor-react": "^1.4.1"
   },
   "devDependencies": {
     "@sanity/pkg-utils": "^7.1.1",
