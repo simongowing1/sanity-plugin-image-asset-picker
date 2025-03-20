@@ -6,6 +6,11 @@
     "sanity",
     "sanity-plugin"
   ],
+  "sanityPlugin": {
+    "verifyPackage": {
+      "tsc": false
+    }
+  },
   "homepage": "https://github.com/simongowing1/sanity-plugin-image-asset-picker#readme",
   "bugs": {
     "url": "https://github.com/simongowing1/sanity-plugin-image-asset-picker/issues"
@@ -53,6 +58,7 @@
     "@types/react": "^19.0.12",
     "@typescript-eslint/eslint-plugin": "^8.27.0",
     "@typescript-eslint/parser": "^8.27.0",
+    "date-fns": "^4.1.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.1",
     "eslint-config-sanity": "^7.1.4",
