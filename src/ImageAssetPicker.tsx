@@ -1,104 +1,109 @@
-import { Card, Stack, Text, Checkbox, Flex, Grid, Button, Inline, TextInput } from '@sanity/ui';
-import { ArrayOfObjectsInputProps, insert, setIfMissing } from 'sanity';
-import { useEffect, useState, useMemo } from 'react';
-import { client } from '@lib/sanity.client';
-import { FloppyDisk } from 'phosphor-react';
-import { SanityAsset } from '@sanity/image-url/lib/types/types';
+import { SanityAsset } from '@sanity/image-url/lib/types/types'
+import { Button, Card, Checkbox, Flex, Grid, Inline, Stack, Text, TextInput } from '@sanity/ui'
+import { FloppyDisk } from 'phosphor-react'
+import { FormEvent, useEffect, useMemo, useState } from 'react'
+import { ArrayOfObjectsInputProps, insert, setIfMissing, useClient } from 'sanity'
 
-type Props = ArrayOfObjectsInputProps;
+type Props = ArrayOfObjectsInputProps
 
 export function ImageAssetPicker({ ...props }: Props) {
-    const { onChange } = props;
+    const { onChange } = props
 
-    const [imageAssets, setImageAssets] = useState<SanityAsset[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [selectedImageAssets, setSelectedImageAssets] = useState<Set<SanityAsset>>(new Set());
-    const selectedImageAssetsArray = useMemo(() => [...selectedImageAssets], [selectedImageAssets]);
+    const client = useClient()
 
-    const [page, setPage] = useState<number>(1);
-    const [pageSize] = useState<number>(80);
-    const [totalPages, setTotalPages] = useState<number>(0);
+    const [imageAssets, setImageAssets] = useState<SanityAsset[]>([])
+    const [loading, setLoading] = useState(true)
+    const [selectedImageAssets, setSelectedImageAssets] = useState<Set<SanityAsset>>(new Set())
+    const selectedImageAssetsArray = useMemo(() => [...selectedImageAssets], [selectedImageAssets])
 
-    const [searchString, setSearchString] = useState<string | null>(null);
+    const [page, setPage] = useState<number>(1)
+    const [pageSize] = useState<number>(80)
+    const [totalPages, setTotalPages] = useState<number>(0)
+
+    const [searchString, setSearchString] = useState<string | null>(null)
 
     const queryProjection = `{
     assetId,
     originalFilename,
     url,  
-    _id}`;
+    _id}`
 
-    const imageAssetQueryWithoutSearchString = `*[_type == "sanity.imageAsset"]`;
+    const imageAssetQueryWithoutSearchString = `*[_type == "sanity.imageAsset"]`
 
-    const imageAssetQueryWithSearchString = `*[_type == "sanity.imageAsset" && defined('originalFilename') && originalFilename match $searchString]`;
+    const imageAssetQueryWithSearchString = `*[_type == "sanity.imageAsset" && defined('originalFilename') && originalFilename match $searchString]`
 
     const imageAssetQueryBuilder = (queryString: string, start: number, end: number) =>
-        `${queryString} | order(_createdAt desc) [${start}...${end}]${queryProjection}`;
+        `${queryString} | order(_createdAt desc) [${start}...${end}]${queryProjection}`
 
     const toggleImageAsset = async (image: SanityAsset) => {
         setSelectedImageAssets((prev) => {
-            const newSet = new Set(prev);
+            const newSet = new Set(prev)
             if (newSet.has(image)) {
-                newSet.delete(image);
+                newSet.delete(image)
             } else {
-                newSet.add(image);
+                newSet.add(image)
             }
-            return newSet;
-        });
-    };
+            return newSet
+        })
+    }
 
     const handleSaveImagesClick = () => {
-        const imageAssets: SanityAsset[] = selectedImageAssetsArray.map((image) => ({
+        const savedImageAssets: SanityAsset[] = selectedImageAssetsArray.map((image) => ({
             _key: image._id,
             _type: `figure`,
             asset: { _ref: image._id, _type: 'reference' },
-        }));
+        }))
 
-        const imagePatches = imageAssets.map((image) => insert([image], 'after', [-1]));
+        const imagePatches = savedImageAssets.map((image) => insert([image], 'after', [-1]))
 
-        onChange([setIfMissing([]), ...imagePatches]);
-        setSelectedImageAssets(new Set());
-    };
+        onChange([setIfMissing([]), ...imagePatches])
+        setSelectedImageAssets(new Set())
+    }
 
-    const handleSearchInputSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        setLoading(true);
-        const totalQuery = `count(${imageAssetQueryWithSearchString})`;
+    function handleSearchInputSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        setLoading(true)
+        const totalQuery = `count(${imageAssetQueryWithSearchString})`
         client.fetch(totalQuery, { searchString: searchString }).then((totalCount: number) => {
-            setTotalPages(Math.ceil(totalCount / pageSize));
-        });
-        const query = imageAssetQueryBuilder(imageAssetQueryWithSearchString, 1, pageSize);
+            setTotalPages(Math.ceil(totalCount / pageSize))
+        })
+        const query = imageAssetQueryBuilder(imageAssetQueryWithSearchString, 1, pageSize)
         client.fetch(query, { searchString: searchString }).then((images: SanityAsset[]) => {
-            setImageAssets(images);
-            setLoading(false);
-        });
-    };
+            setImageAssets(images)
+            setLoading(false)
+        })
+    }
 
-    const handleSearchInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-        const nextValue = event.currentTarget.value;
-        setSearchString(nextValue);
-    };
+    const handleSearchInputChange = (event: FormEvent<HTMLInputElement>) => {
+        const nextValue = event.currentTarget.value
+        setSearchString(nextValue)
+    }
+
+    const handleCheckboxChange = (image: SanityAsset) => {
+        toggleImageAsset(image)
+    }
 
     useEffect(() => {
-        const totalQuery = `count(${imageAssetQueryWithoutSearchString})`;
+        const totalQuery = `count(${imageAssetQueryWithoutSearchString})`
         client.fetch(totalQuery).then((totalCount: number) => {
-            setTotalPages(Math.ceil(totalCount / pageSize));
-        });
+            setTotalPages(Math.ceil(totalCount / pageSize))
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [])
 
     useEffect(() => {
-        setLoading(true);
-        const start = (page - 1) * pageSize;
-        const end = start + pageSize;
+        setLoading(true)
+        const start = (page - 1) * pageSize
+        const end = start + pageSize
         const query = searchString
             ? imageAssetQueryBuilder(imageAssetQueryWithSearchString, start, end)
-            : imageAssetQueryBuilder(imageAssetQueryWithoutSearchString, start, end);
+            : imageAssetQueryBuilder(imageAssetQueryWithoutSearchString, start, end)
         client.fetch(query, { searchString: searchString }).then((images: SanityAsset[]) => {
-            setImageAssets(images);
-            setLoading(false);
-        });
+            setImageAssets(images)
+            setLoading(false)
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page, pageSize]);
+    }, [page, pageSize])
 
     return (
         <Stack space={6}>
@@ -136,7 +141,7 @@ export function ImageAssetPicker({ ...props }: Props) {
                         </Button>
                         {loading ? (
                             <Text size={1}>Loading images...</Text>
-                        ) : !imageAssets.length ? (
+                        ) : imageAssets.length === 0 ? (
                             <Text size={1}>No images found</Text>
                         ) : (
                             <Stack space={2}>
@@ -154,7 +159,7 @@ export function ImageAssetPicker({ ...props }: Props) {
                                                     <Checkbox
                                                         id={image._id}
                                                         checked={selectedImageAssets.has(image)}
-                                                        onChange={() => toggleImageAsset(image)}
+                                                        onChange={() => handleCheckboxChange(image)}
                                                     />
                                                     <Text size={1} muted>
                                                         {selectedImageAssets.has(image.uploadId) ? 'Selected' : 'Not selected'}
@@ -200,5 +205,5 @@ export function ImageAssetPicker({ ...props }: Props) {
                 </Stack>
             </Stack>
         </Stack>
-    );
+    )
 }

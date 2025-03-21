@@ -10,6 +10,20 @@
     "sanity/react",
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
-    "plugin:react/jsx-runtime"
-  ]
-}
+    "plugin:react/jsx-runtime",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+    "rules": {
+      "react/jsx-no-bind": "off",
+      "no-nested-ternary": "off",
+      "react/no-array-index-key": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off"
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
+  }
