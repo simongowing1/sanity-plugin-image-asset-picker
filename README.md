@@ -1,26 +1,63 @@
-# sanity-plugin-image-asset-picker
+# Sanity Image Asset Picker
 
-> This is a **Sanity Studio v3** plugin.
+A Sanity Studio plugin that enables users to browse and bulk-select image assets to add to an image array field.
 
 ## Installation
 
-```sh
+```bash
 npm install sanity-plugin-image-asset-picker
 ```
 
 ## Usage
 
-Add it as a plugin in `sanity.config.ts` (or .js):
+### As a Sanity Plugin
 
-```ts
-import {defineConfig} from 'sanity'
-import {myPlugin} from 'sanity-plugin-image-asset-picker'
+Add the plugin to your Sanity configuration:
+
+```js
+// sanity.config.js or sanity.config.ts
+import {defineConfig} from 'sanity';
+import {imageAssetPickerPlugin} from 'sanity-plugin-image-asset-picker';
 
 export default defineConfig({
-  //...
-  plugins: [myPlugin({})],
-})
+  // ...
+  plugins: [imageAssetPickerPlugin()],
+});
 ```
+
+The plugin will register the `ImageAssetPicker` component to be used with array fields.
+
+### As a Component
+
+You can also use the `ImageAssetPicker` component directly in schema definitions:
+
+```js
+// In your schema definition
+import {defineField} from 'sanity';
+import {ImageAssetPicker} from 'sanity-plugin-image-asset-picker';
+
+export default defineField({
+  name: 'images',
+  type: 'array',
+  title: 'Images',
+  of: [{type: 'image'}],
+  components: {
+    input: ImageAssetPicker,
+  },
+});
+```
+
+## Features
+
+- Browse all image assets in your Sanity dataset
+- Search for specific images by filename
+- Select multiple images to add to an array field
+- Pagination for browsing large image collections
+
+## Requirements
+
+- Sanity v3.x
+- React 18+
 
 ## License
 
