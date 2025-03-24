@@ -1,39 +1,41 @@
-import { SanityAsset } from '@sanity/image-url/lib/types/types'
-import { Button, Card, Checkbox, Flex, Grid, Inline, Stack, Text, TextInput } from '@sanity/ui'
-import { FloppyDisk } from 'phosphor-react'
-import { FormEvent, useEffect, useMemo, useState } from 'react'
-import { ArrayOfObjectsInputProps, insert, setIfMissing, useClient } from 'sanity'
+import { SanityAsset } from '@sanity/image-url/lib/types/types';
+import { Button, Card, Checkbox, Flex, Grid, Inline, Stack, Text, TextInput } from '@sanity/ui';
+import { FloppyDisk } from 'phosphor-react';
+import { FormEvent, useEffect, useMemo, useState } from 'react';
+import { ArrayOfObjectsInputProps, insert, setIfMissing, useClient } from 'sanity';
 
 type Props = ArrayOfObjectsInputProps
 
 export function ImageAssetPicker({ ...props }: Props) {
-    const { onChange } = props
+    const { onChange } = props;
 
-    const client = useClient()
+    const client = useClient();
 
-    const [imageAssets, setImageAssets] = useState<SanityAsset[]>([])
-    const [loading, setLoading] = useState(true)
-    const [selectedImageAssets, setSelectedImageAssets] = useState<Set<SanityAsset>>(new Set())
-    const selectedImageAssetsArray = useMemo(() => [...selectedImageAssets], [selectedImageAssets])
+    const [imageAssets, setImageAssets] = useState<SanityAsset[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [selectedImageAssets, setSelectedImageAssets] = useState<Set<SanityAsset>>(new Set());
+    const selectedImageAssetsArray = useMemo(() => [...selectedImageAssets], [selectedImageAssets]);
 
-    const [page, setPage] = useState<number>(1)
-    const [pageSize] = useState<number>(80)
-    const [totalPages, setTotalPages] = useState<number>(0)
+    const [page, setPage] = useState<number>(1);
+    const [pageSize] = useState<number>(80);
+    const [totalPages, setTotalPages] = useState<number>(0);
 
-    const [searchString, setSearchString] = useState<string | null>(null)
+    const [searchString, setSearchString] = useState<string | null>(null);
 
     const queryProjection = `{
     assetId,
     originalFilename,
     url,  
-    _id}`
+    _id
+    }`;
 
-    const imageAssetQueryWithoutSearchString = `*[_type == "sanity.imageAsset"]`
 
-    const imageAssetQueryWithSearchString = `*[_type == "sanity.imageAsset" && defined('originalFilename') && originalFilename match $searchString]`
+    const imageAssetQueryWithoutSearchString = `*[_type == "sanity.imageAsset"]`;
+
+    const imageAssetQueryWithSearchString = `*[_type == "sanity.imageAsset" && defined('originalFilename') && originalFilename match $searchString]`;
 
     const imageAssetQueryBuilder = (queryString: string, start: number, end: number) =>
-        `${queryString} | order(_createdAt desc) [${start}...${end}]${queryProjection}`
+        `${queryString} | order(_createdAt desc) [${start}...${end}]${queryProjection}`;
 
     const toggleImageAsset = async (image: SanityAsset) => {
         setSelectedImageAssets((prev) => {
@@ -45,7 +47,7 @@ export function ImageAssetPicker({ ...props }: Props) {
             }
             return newSet
         })
-    }
+    };
 
     const handleSaveImagesClick = () => {
         const savedImageAssets: SanityAsset[] = selectedImageAssetsArray.map((image) => ({
@@ -58,7 +60,7 @@ export function ImageAssetPicker({ ...props }: Props) {
 
         onChange([setIfMissing([]), ...imagePatches])
         setSelectedImageAssets(new Set())
-    }
+    };
 
     function handleSearchInputSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -72,16 +74,16 @@ export function ImageAssetPicker({ ...props }: Props) {
             setImageAssets(images)
             setLoading(false)
         })
-    }
+    };
 
     const handleSearchInputChange = (event: FormEvent<HTMLInputElement>) => {
         const nextValue = event.currentTarget.value
         setSearchString(nextValue)
-    }
+    };
 
     const handleCheckboxChange = (image: SanityAsset) => {
         toggleImageAsset(image)
-    }
+    };
 
     useEffect(() => {
         const totalQuery = `count(${imageAssetQueryWithoutSearchString})`
@@ -89,7 +91,7 @@ export function ImageAssetPicker({ ...props }: Props) {
             setTotalPages(Math.ceil(totalCount / pageSize))
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, []);
 
     useEffect(() => {
         setLoading(true)
@@ -103,7 +105,7 @@ export function ImageAssetPicker({ ...props }: Props) {
             setLoading(false)
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page, pageSize])
+    }, [page, pageSize]);
 
     return (
         <Stack space={6}>
@@ -206,4 +208,4 @@ export function ImageAssetPicker({ ...props }: Props) {
             </Stack>
         </Stack>
     )
-}
+};
