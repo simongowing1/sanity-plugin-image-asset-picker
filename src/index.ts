@@ -1,26 +1,46 @@
-import {definePlugin} from 'sanity'
-
-interface MyPluginConfig {
-  /* nothing here yet */
-}
+import { definePlugin } from 'sanity';
+import { ImageAssetPicker } from './ImageAssetPicker';
 
 /**
  * Usage in `sanity.config.ts` (or .js)
  *
  * ```ts
- * import {defineConfig} from 'sanity'
- * import {myPlugin} from 'sanity-plugin-image-asset-picker'
+ * import { defineConfig } from 'sanity'
+ * import { imageAssetPickerPlugin } from 'sanity-plugin-image-asset-picker'
  *
  * export default defineConfig({
  *   // ...
- *   plugins: [myPlugin()],
+ *   plugins: [imageAssetPickerPlugin()]
+ * })
+ * ```
+ * 
+ * Or use as a form component directly:
+ * ```ts
+ * import { defineField } from 'sanity'
+ * import { ImageAssetPicker } from 'sanity-plugin-image-asset-picker'
+ * 
+ * defineField({
+ *   name: 'images',
+ *   type: 'array',
+ *   title: 'Images',
+ *   of: [{ type: 'image' }],
+ *   components: {
+ *     input: ImageAssetPicker
+ *   }
  * })
  * ```
  */
-export const myPlugin = definePlugin<MyPluginConfig | void>((config = {}) => {
-  // eslint-disable-next-line no-console
-  console.log('hello from sanity-plugin-image-asset-picker')
+
+// Plugin definition - registers the component as a custom input component for array fields
+export const imageAssetPickerPlugin = definePlugin(() => {
   return {
     name: 'sanity-plugin-image-asset-picker',
-  }
-})
+    form: {
+      components: {
+        input: {
+          'array:image[]': ImageAssetPicker,
+        },
+      },
+    },
+  };
+});
