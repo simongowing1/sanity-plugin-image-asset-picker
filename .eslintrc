@@ -1,29 +1,30 @@
-{
-  "root": true,
+{"root": true,
   "env": {
     "node": true,
     "browser": true
   },
   "extends": [
-    "sanity",
+      "next", 
+      "sanity", 
+      "sanity/typescript",
+      "sanity/react",
+      "eslint:recommended"],
+  "plugins": [
+    "prettier/recommended",
+    "react-hooks/recommended",
+    "react",
+    "@typescript-eslint",
     "sanity/typescript",
-    "sanity/react",
-    "plugin:react-hooks/recommended",
-    "plugin:prettier/recommended",
-    "plugin:react/jsx-runtime",
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
-    "rules": {
-      "react/jsx-no-bind": "off",
-      "no-nested-ternary": "off",
-      "react/no-array-index-key": "off",
-      "@typescript-eslint/explicit-module-boundary-types": "off"
-    },
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
+    "@typescript-eslint/recommended",
+    "react/recommended",
+    "react/jsx-runtime"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
     }
   }
+}
