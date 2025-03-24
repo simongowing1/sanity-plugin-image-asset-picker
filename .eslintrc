@@ -1,23 +1,18 @@
-{"root": true,
+{
+  "root": true,
   "env": {
     "node": true,
     "browser": true
   },
-  "extends": [
-      "next", 
+  "extends": [ 
       "sanity", 
       "sanity/typescript",
       "sanity/react",
-      "eslint:recommended"],
-  "plugins": [
-    "prettier/recommended",
-    "react-hooks/recommended",
-    "react",
-    "@typescript-eslint",
-    "sanity/typescript",
-    "@typescript-eslint/recommended",
-    "react/recommended",
-    "react/jsx-runtime"],
+      "eslint:recommended",
+      "plugin:prettier/recommended",
+      "plugin:react-hooks/recommended",
+      "plugin:react/recommended"
+  ],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error"
