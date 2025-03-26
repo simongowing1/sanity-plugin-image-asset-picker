@@ -9,7 +9,7 @@ type Props = ArrayOfObjectsInputProps
 export function ImageAssetPicker({ ...props }: Props) {
     const { onChange } = props;
 
-    const client = useClient();
+    const client = useClient({ apiVersion: '2022-11-15' });
 
     const [imageAssets, setImageAssets] = useState<SanityAsset[]>([]);
     const [loading, setLoading] = useState(true);
@@ -52,7 +52,7 @@ export function ImageAssetPicker({ ...props }: Props) {
     const handleSaveImagesClick = () => {
         const savedImageAssets: SanityAsset[] = selectedImageAssetsArray.map((image) => ({
             _key: image._id,
-            _type: `figure`,
+            type: `image`,
             asset: { _ref: image._id, _type: 'reference' },
         }))
 
