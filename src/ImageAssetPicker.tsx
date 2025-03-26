@@ -24,7 +24,7 @@ export function ImageAssetPicker({ ...props }: Props) {
 
     const [searchString, setSearchString] = useState<string | null>(null);
 
-    const queryProjection = `{
+    const imageAssetQueryProjection = `{
     assetId,
     originalFilename,
     url,  
@@ -37,7 +37,7 @@ export function ImageAssetPicker({ ...props }: Props) {
     const imageAssetQueryWithSearchString = `*[_type == "sanity.imageAsset" && defined('originalFilename') && originalFilename match $searchString]`;
 
     const imageAssetQueryBuilder = (queryString: string, start: number, end: number) =>
-        `${queryString} | order(_createdAt desc) [${start}...${end}]${queryProjection}`;
+        `${queryString} | order(_createdAt desc) [${start}...${end}]${imageAssetQueryProjection}`;
 
     const toggleImageAsset = async (image: SanityAsset) => {
         setSelectedImageAssets((prev) => {
@@ -102,6 +102,7 @@ export function ImageAssetPicker({ ...props }: Props) {
     }, []);
 
     useEffect(() => {
+        if (!isImageAssetDialogueOpen) return;
         setImageAssetsLoading(true)
         const start = (page - 1) * pageSize
         const end = start + pageSize
@@ -113,7 +114,7 @@ export function ImageAssetPicker({ ...props }: Props) {
             setImageAssetsLoading(false)
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page, pageSize, props.value]);
+    }, [page, pageSize, isImageAssetDialogueOpen]);
 
     return (
         <Stack space={6}>
