@@ -99,7 +99,7 @@ export const useImageAssetPicker = ({ onChange }: UseImageAssetPickerProps) => {
             setImageAssets(images);
             setImageAssetsLoading(false);
         });
-    }, [page, pageSize, isImageAssetDialogueOpen, searchString]);
+    }, [page, pageSize, isImageAssetDialogueOpen]);
 
     return {
         // State
