@@ -3,6 +3,7 @@ import { FloppyDisk } from 'phosphor-react';
 import { FormEvent } from 'react';
 import { SanityAsset } from '@sanity/image-url/lib/types/types';
 import { ImageAssetCard } from './ImageAssetCard';
+import { ImageSearchForm } from './ImageSearchForm';
 
 type ImageAssetDialogueProps = {
     imageAssets: SanityAsset[];
@@ -36,22 +37,11 @@ export function ImageAssetDialogue({
         <Dialog id="image-asset-dialogue" width={100} header="Uploaded Images" onClose={onClose}>
             <Stack space={4} padding={4}>
                 <Stack space={6}>
-                    <form onSubmit={onSearchSubmit}>
-                        <Flex direction={'column'} gap={2}>
-                            <TextInput
-                                width={'fill'}
-                                type="text"
-                                value={searchString || ''}
-                                onChange={onSearchChange}
-                                placeholder="Search for images by filename"
-                            />
-                            <Button type="submit" mode="ghost" padding={3} width={'fill'}>
-                                <Flex justify="center" align="center">
-                                    <Text size={1}>Search</Text>
-                                </Flex>
-                            </Button>
-                        </Flex>
-                    </form>
+                    <ImageSearchForm
+                        onSearchSubmit={onSearchSubmit}
+                        onSearchChange={onSearchChange}
+                        searchString={searchString}
+                    />
 
                     <Stack space={4}>
                         <Button onClick={onSave} mode="ghost" padding={2} width={'fill'}>
