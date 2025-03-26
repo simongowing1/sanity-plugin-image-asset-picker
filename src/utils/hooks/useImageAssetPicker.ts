@@ -55,12 +55,12 @@ export const useImageAssetPicker = ({ onChange }: UseImageAssetPickerProps) => {
     const handleSearchInputSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setImageAssetsLoading(true);
-        const totalQuery = `count(${imageAssetQueryWithSearchString})`;
+        const totalQuery = `count(${imageAssetQueryWithSearchString(searchString)})`;
         client.fetch(totalQuery, { searchString }).then((totalCount: number) => {
             setTotalPages(Math.ceil(totalCount / pageSize));
         });
-        const query = imageAssetQueryBuilder(imageAssetQueryWithSearchString, 1, pageSize);
-        client.fetch(query, { searchString }).then((images: SanityAsset[]) => {
+        const query = imageAssetQueryBuilder(imageAssetQueryWithSearchString(searchString), 0, pageSize);
+        client.fetch(query).then((images: SanityAsset[]) => {
             setImageAssets(images);
             setImageAssetsLoading(false);
         });
@@ -92,10 +92,10 @@ export const useImageAssetPicker = ({ onChange }: UseImageAssetPickerProps) => {
         const start = (page - 1) * pageSize;
         const end = start + pageSize;
         const query = searchString
-            ? imageAssetQueryBuilder(imageAssetQueryWithSearchString, start, end)
+            ? imageAssetQueryBuilder(imageAssetQueryWithSearchString(searchString), start, end)
             : imageAssetQueryBuilder(imageAssetQueryWithoutSearchString, start, end);
 
-        client.fetch(query, { searchString }).then((images: SanityAsset[]) => {
+        client.fetch(query).then((images: SanityAsset[]) => {
             setImageAssets(images);
             setImageAssetsLoading(false);
         });
