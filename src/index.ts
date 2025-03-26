@@ -1,5 +1,5 @@
 import { definePlugin } from 'sanity';
-import { ImageAssetPicker } from './ImageAssetPicker';
+import { ImageAssetPicker } from './components/ImageAssetPicker';
 import type { ArrayOfObjectsInputProps, ArraySchemaType, InputProps } from 'sanity';
 
 /**

@@ -3,6 +3,8 @@ import { Button, Card, Checkbox, Dialog, Flex, Grid, Inline, Stack, Text, TextIn
 import { FloppyDisk, FolderSimplePlus } from 'phosphor-react';
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { ArrayOfObjectsInputProps, insert, setIfMissing, useClient } from 'sanity';
+import { imageAssetQueryBuilder, imageAssetQueryWithSearchString, imageAssetQueryWithoutSearchString } from '../../utils/helpers/queryHelpers';
+import { ImageAssetCard } from './ImageAssetCard';
 
 type Props = ArrayOfObjectsInputProps
 
@@ -23,21 +25,6 @@ export function ImageAssetPicker({ ...props }: Props) {
     const [totalPages, setTotalPages] = useState<number>(0);
 
     const [searchString, setSearchString] = useState<string | null>(null);
-
-    const imageAssetQueryProjection = `{
-    assetId,
-    originalFilename,
-    url,  
-    _id
-    }`;
-
-
-    const imageAssetQueryWithoutSearchString = `*[_type == "sanity.imageAsset"]`;
-
-    const imageAssetQueryWithSearchString = `*[_type == "sanity.imageAsset" && defined('originalFilename') && originalFilename match $searchString]`;
-
-    const imageAssetQueryBuilder = (queryString: string, start: number, end: number) =>
-        `${queryString} | order(_createdAt desc) [${start}...${end}]${imageAssetQueryProjection}`;
 
     const toggleImageAsset = async (image: SanityAsset) => {
         setSelectedImageAssets((prev) => {
@@ -168,41 +155,13 @@ export function ImageAssetPicker({ ...props }: Props) {
                                     <Stack space={2}>
                                         <Grid columns={4} rows={Math.ceil(imageAssets.length / 4)} gap={1}>
                                             {imageAssets.map((image, index) => (
-                                                <Card
+                                                <ImageAssetCard
                                                     key={image._id || index}
-                                                    padding={1}
-                                                    radius={2}
-                                                    tone="default"
-                                                    value={image._id}
-                                                >
-                                                    <Stack space={3}>
-                                                        <Flex justify="space-between" align="center">
-                                                            <Checkbox
-                                                                id={image._id}
-                                                                checked={selectedImageAssets.has(image)}
-                                                                onChange={() => handleCheckboxChange(image)}
-                                                            />
-                                                            <Text size={1} muted>
-                                                                {selectedImageAssets.has(image.uploadId) ? 'Selected' : 'Not selected'}
-                                                            </Text>
-                                                        </Flex>
-                                                        {image.url && (
-                                                            <img
-                                                                src={`${image.url}?w=200`}
-                                                                alt={image.title}
-                                                                className="h-[150px] w-full object-cover"
-                                                            />
-                                                        )}
-                                                        <Stack space={2}>
-                                                            <Text size={1}>{image.title}</Text>
-                                                            {image.artistName && (
-                                                                <Text size={1} muted>
-                                                                    by {image.artistName}
-                                                                </Text>
-                                                            )}
-                                                        </Stack>
-                                                    </Stack>
-                                                </Card>
+                                                    image={image}
+                                                    selectedImageAssets={selectedImageAssets}
+                                                    handleCheckboxChange={handleCheckboxChange}
+                                                    index={index}
+                                                />
                                             ))}
                                         </Grid>
                                         <Grid columns={12} rows={totalPages / 12} gap={1}>
