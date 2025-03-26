@@ -5,8 +5,8 @@
     "browser": true
   },
   "extends": [ 
-      "sanity", 
-      "sanity/typescript",
+      "sanity",
+      // "sanity/typescript",
       "sanity/react",
       "eslint:recommended",
       "plugin:prettier/recommended",
