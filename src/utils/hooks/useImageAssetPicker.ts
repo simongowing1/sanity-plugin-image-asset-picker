@@ -73,6 +73,7 @@ export const useImageAssetPicker = ({ onChange }: UseImageAssetPickerProps) => {
 
     const handleCloseImageAssetDialogue = () => {
         setIsImageAssetDialogueOpen(false);
+        setSearchString(null);
         setSelectedImageAssets(new Set());
     };
 
