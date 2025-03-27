@@ -21,7 +21,7 @@ export const ImageAssetGrid = (props: ImageAssetGridProps) => {
         <Stack space={4}>
             <Button
                 mode="ghost"
-                paddingY={2}
+                paddingY={3}
                 width={'fill'}
                 onClick={onSave}
                 icon={AddIcon}

@@ -21,11 +21,7 @@ export const ImageSearchForm = (props: ImageSearchFormProps) => {
                     onChange={onSearchChange}
                     placeholder="Search for images by filename"
                 />
-                <Button type="submit" mode="ghost" padding={3} width={'fill'}>
-                    <Flex justify="center" align="center">
-                        <Text size={1}>Search</Text>
-                    </Flex>
-                </Button>
+                <Button type="submit" mode="ghost" padding={3} width={'fill'} text="Search" />
             </Flex>
         </form>
     )
