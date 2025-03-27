@@ -13,12 +13,13 @@ export const ImageAssetCard = (props: ImageAssetCardProps) => {
     return (
         <Card
             key={image._id || index}
-            padding={1}
+            padding={3}
             radius={2}
-            tone="default"
+            tone={selectedImageAssets.has(image) ? 'transparent' : 'default'}
             value={image._id}
+            width={'fill'}
         >
-            <Stack space={3}>
+            <Stack space={3} width={'fill'}>
                 <Flex justify="space-between" align="center">
                     <Checkbox
                         id={image._id}
@@ -26,23 +27,37 @@ export const ImageAssetCard = (props: ImageAssetCardProps) => {
                         onChange={() => handleCheckboxChange(image)}
                     />
                     <Text size={1} muted>
-                        {selectedImageAssets.has(image.uploadId) ? 'Selected' : 'Not selected'}
+                        {selectedImageAssets.has(image) ? 'Selected' : 'Not selected'}
                     </Text>
                 </Flex>
                 {image.url && (
-                    <img
-                        src={`${image.url}?w=200`}
-                        alt={image.title}
-                        className="h-[150px] w-full object-cover"
-                    />
+                    <div style={{
+                        width: '100%',
+                        height: '150px',
+                        position: 'relative',
+                        overflow: 'hidden'
+                    }}>
+                        <img
+                            src={`${image.url}?w=200`}
+                            alt={image.title}
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'contain',
+                                display: 'block'
+                            }}
+                        />
+                    </div>
                 )}
                 <Stack space={2}>
-                    <Text size={1}>{image.title}</Text>
-                    {image.artistName && (
-                        <Text size={1} muted>
-                            by {image.artistName}
-                        </Text>
-                    )}
+                    <Text
+                        size={1}
+                        muted
+                        textOverflow="ellipsis"
+                        title={image.title || image.originalFilename}
+                    >
+                        {image.title || image.originalFilename}
+                    </Text>
                 </Stack>
             </Stack>
         </Card>
