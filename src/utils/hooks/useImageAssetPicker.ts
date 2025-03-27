@@ -42,7 +42,7 @@ export const useImageAssetPicker = ({ onChange }: UseImageAssetPickerProps) => {
     const handleSaveImagesClick = () => {
         const savedImageAssets: SanityAsset[] = selectedImageAssetsArray.map((image) => ({
             _key: image._id,
-            type: 'image',
+            _type: 'image',
             asset: { _ref: image._id, _type: 'reference' },
         }));
 
@@ -74,7 +74,7 @@ export const useImageAssetPicker = ({ onChange }: UseImageAssetPickerProps) => {
     const handleCloseImageAssetDialogue = () => {
         setIsImageAssetDialogueOpen(false);
         setSearchString(null);
-        setSelectedImageAssets(new Set());
+        setSelectedImageAssets(new Set()); ``
     };
 
     // Load initial data
