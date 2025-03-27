@@ -15,7 +15,7 @@ export const ImageAssetCard = (props: ImageAssetCardProps) => {
             key={image._id || index}
             padding={3}
             radius={2}
-            tone={selectedImageAssets.has(image) ? 'transparent' : 'default'}
+            tone={selectedImageAssets.has(image) ? 'primary' : 'default'}
             value={image._id}
             width={'fill'}
         >
