@@ -37,8 +37,8 @@ export const ImageAssetGrid = (props: ImageAssetGridProps) => {
             ) : imageAssets.length === 0 ? (
                 <Text size={1}>No images found</Text>
             ) : (
-                <Stack space={2}>
-                    <Grid columns={4} rows={Math.ceil(imageAssets.length / 4)} gap={1}>
+                <Stack space={3}>
+                    <Grid columns={4} rows={Math.ceil(imageAssets.length / 4)} gap={3}>
                         {imageAssets.map((image, index) => (
                             <ImageAssetCard
                                 key={image._id || index}
