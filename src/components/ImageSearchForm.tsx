@@ -1,6 +1,6 @@
 import { TextInput, Flex, Button, Text } from "@sanity/ui"
 import { FormEvent } from "react"
-
+import { SearchIcon } from "@sanity/icons";
 interface ImageSearchFormProps {
     onSearchSubmit: (event: FormEvent<HTMLFormElement>) => void;
     onSearchChange: (event: FormEvent<HTMLInputElement>) => void;
@@ -16,6 +16,7 @@ export const ImageSearchForm = (props: ImageSearchFormProps) => {
                 <TextInput
                     width={'fill'}
                     type="text"
+                    icon={SearchIcon}
                     value={searchString || ''}
                     onChange={onSearchChange}
                     placeholder="Search for images by filename"
