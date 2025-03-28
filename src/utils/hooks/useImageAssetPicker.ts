@@ -121,7 +121,6 @@ export const useImageAssetPicker = ({onChange}: UseImageAssetPickerProps) => {
     searchString,
     selectedImageAssets,
     totalPages,
-    page,
 
     // Handlers
     handleCheckboxChange,

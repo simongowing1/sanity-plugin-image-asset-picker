@@ -17,7 +17,6 @@ export function ImageAssetPicker({...props}: Props) {
     searchString,
     selectedImageAssets,
     totalPages,
-    page,
     handleCheckboxChange,
     handleSaveImagesClick,
     handleSearchInputSubmit,
@@ -53,7 +52,6 @@ export function ImageAssetPicker({...props}: Props) {
           searchString={searchString}
           selectedImageAssets={selectedImageAssets}
           totalPages={totalPages}
-          page={page}
           onCheckboxChange={handleCheckboxChange}
           onSave={handleSaveImagesClick}
           onSearchSubmit={handleSearchInputSubmit}

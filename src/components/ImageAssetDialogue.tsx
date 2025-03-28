@@ -10,7 +10,6 @@ type ImageAssetDialogueProps = {
   searchString: string | null;
   selectedImageAssets: Set<SanityAsset>;
   totalPages: number;
-  page: number;
   onCheckboxChange: (image: SanityAsset) => void;
   onSave: () => void;
   onSearchSubmit: (event: FormEvent<HTMLFormElement>) => void;
