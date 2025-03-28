@@ -37,7 +37,7 @@ export const ImageAssetGrid = (props: ImageAssetGridProps) => {
             ) : imageAssets.length === 0 ? (
                 <Text size={1}>No images found</Text>
             ) : (
-                <Stack space={3}>
+                <Stack space={6}>
                     <Grid columns={4} rows={Math.ceil(imageAssets.length / 4)} gap={3}>
                         {imageAssets.map((image, index) => (
                             <ImageAssetCard
@@ -49,21 +49,24 @@ export const ImageAssetGrid = (props: ImageAssetGridProps) => {
                             />
                         ))}
                     </Grid>
-                    <Grid columns={12} rows={totalPages / 12} gap={1}>
-                        {[...Array(totalPages)].map((_, index) => (
-                            <Button
-                                key={index}
-                                mode="ghost"
-                                padding={3}
-                                width={'fill'}
-                                onClick={() => onPageChange(index + 1)}
-                            >
-                                <Flex justify="center" align="center">
-                                    <Text size={1}>{index + 1}</Text>
-                                </Flex>
-                            </Button>
-                        ))}
-                    </Grid>
+                    <Stack space={4}>
+                        <Text size={1}>Pagination</Text>
+                        <Grid columns={12} rows={totalPages / 12} gap={1}>
+                            {[...Array(totalPages)].map((_, index) => (
+                                <Button
+                                    key={index}
+                                    mode="ghost"
+                                    padding={3}
+                                    width={'fill'}
+                                    onClick={() => onPageChange(index + 1)}
+                                >
+                                    <Flex justify="center" align="center">
+                                        <Text size={1}>{index + 1}</Text>
+                                    </Flex>
+                                </Button>
+                            ))}
+                        </Grid>
+                    </Stack>
                 </Stack>
             )}
         </Stack>
