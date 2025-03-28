@@ -1,6 +1,9 @@
-*.js
-.eslintrc.js
+node_modules/
+dist/
+build/
+coverage/
+*.d.ts
+*.config.ts
+v2-incompatible.js
 commitlint.config.js
-dist
 lint-staged.config.js
-package.config.ts

@@ -1,6 +1,7 @@
-import { definePlugin } from 'sanity';
-import { ImageAssetPicker } from './components/ImageAssetPicker';
-import type { ArrayOfObjectsInputProps, ArraySchemaType, InputProps } from 'sanity';
+import type {ArrayOfObjectsInputProps, ArraySchemaType, InputProps} from 'sanity';
+import {definePlugin} from 'sanity';
+
+import {ImageAssetPicker} from './components/ImageAssetPicker';
 
 /**
  * Usage in `sanity.config.ts` (or .js)
@@ -29,11 +30,13 @@ export const imageAssetPickerPlugin = definePlugin(() => {
 
           const arrayType = props.schemaType as ArraySchemaType;
           const containsImageType = arrayType.of?.some(
-            member => typeof member.type?.name === 'string' && member.type?.name === 'image'
+            (member) => typeof member.type?.name === 'string' && member.type?.name === 'image',
           );
 
-          return containsImageType ? ImageAssetPicker({ ...props as ArrayOfObjectsInputProps }) : props.renderDefault(props);
-        }
+          return containsImageType
+            ? ImageAssetPicker({...(props as ArrayOfObjectsInputProps)})
+            : props.renderDefault(props);
+        },
       },
     },
   };
