@@ -25,27 +25,7 @@ export default defineConfig({
 });
 ```
 
-The plugin will register the `ImageAssetPicker` component to be used with array fields.
-
-### As a Component
-
-You can also use the `ImageAssetPicker` component directly in schema definitions:
-
-```js
-// In your schema definition
-import {defineField} from 'sanity';
-import {ImageAssetPicker} from 'sanity-plugin-image-asset-picker';
-
-export default defineField({
-  name: 'images',
-  type: 'array',
-  title: 'Images',
-  of: [{type: 'image'}],
-  components: {
-    input: ImageAssetPicker,
-  },
-});
-```
+The plugin will register the `ImageAssetPicker` component to be used with `array` fields of type `image`. You do not need to use the component directly in schema definitions.
 
 ## Features
 
