@@ -1,3 +1,5 @@
+> This is a **Sanity Studio v3** plugin.
+
 # Sanity Image Asset Picker
 
 A Sanity Studio plugin that enables users to browse and bulk-select image assets to add to an image array field.
@@ -50,3 +52,11 @@ with default configuration for build & watch scripts.
 
 See [Testing a plugin in Sanity Studio](https://github.com/sanity-io/plugin-kit#testing-a-plugin-in-sanity-studio)
 on how to run this plugin with hotreload in the studio.
+
+
+### Release new version
+
+Run ["CI & Release" workflow](https://github.com/simongowing1/sanity-plugin-image-asset-picker/actions/workflows/main.yml).
+Make sure to select the main branch and check "Release new version".
+
+Semantic release will only release on configured branches, so it is safe to run release on any branch.
