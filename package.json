@@ -73,17 +73,18 @@
     "lint-staged": "^15.5.0",
     "prettier": "^3.5.3",
     "prettier-plugin-packagejson": "^2.5.10",
-    "react": "^19.0.0",
+    "react": "19.1.0",
     "react-dom": "^19.0.0",
     "sanity": "^3.80.1",
     "styled-components": "^6.1.16",
     "typescript": "^5.8.2"
   },
   "peerDependencies": {
-    "react": "^18",
+    "react": "19.1.0",
     "sanity": "^3"
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "browserslist": "extends @sanity/browserslist-config"
 }
