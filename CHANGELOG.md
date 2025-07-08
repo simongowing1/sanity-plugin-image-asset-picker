@@ -5,6 +5,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>1.0.1 (2025-07-08)</small>
+
+- fix: reset version to 1.0.0 for semantic-release ([a154826](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/a154826))
+- feat!: upgrade to React 19.1.0 ([b277eba](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/b277eba))
+- fix!: correct version number in package.json ([dc6d60d](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/dc6d60d))
+- fix!: update version to v2 in package.json ([701b7d2](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/701b7d2))
+- Merge pull request #4 from simongowing1/feat/update-to-react-19 ([9ee332d](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/9ee332d)), closes [#4](https://github.com/simongowing1/sanity-plugin-image-asset-picker/issues/4)
+- Merge pull request #5 from simongowing1/feat/update-to-react-19 ([ec6ab20](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/ec6ab20)), closes [#5](https://github.com/simongowing1/sanity-plugin-image-asset-picker/issues/5)
+
 ## 1.0.0 (2025-07-04)
 
 - Initial commit ([f7c1e05](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/f7c1e05))
