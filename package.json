@@ -1,6 +1,6 @@
 {
   "name": "sanity-plugin-image-asset-picker",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Enables user to bulk-select image assets to add to image array.",
   "keywords": [
     "sanity",
