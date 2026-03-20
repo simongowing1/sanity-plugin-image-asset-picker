@@ -5,6 +5,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.0.0 (2026-03-20)
+
+- feat: upgrade to Sanity v5 and React 19.2+ ([4024e7f](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/4024e7f))
+- feat!: remove support for Sanity v3 and update README ([223f0b2](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/223f0b2))
+- Merge pull request #6 from simongowing1/feat/update-sanity-latest ([fd7cd26](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/fd7cd26)), closes [#6](https://github.com/simongowing1/sanity-plugin-image-asset-picker/issues/6)
+- Merge pull request #7 from simongowing1/chore/update-actions-to-checkout@v6-setup-node@v6 ([9c2178c](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/9c2178c)), closes [#7](https://github.com/simongowing1/sanity-plugin-image-asset-picker/issues/7)
+- chore: update @sanity/plugin-kit to v4.0.20 and @sanity/semantic-release-preset to v6.0.0 ([9e85035](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/9e85035))
+- chore: update dependencies to latest versions including React 19.2.4 and Sanity 5.17.1 ([97614bd](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/97614bd))
+- chore: update GitHub Actions to use checkout and setup-node v6 ([131eb7a](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/131eb7a))
+- chore: update package-lock ([4e5ab7a](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/4e5ab7a))
+- refactor: update SanityAsset import path across components ([8dbac70](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/8dbac70))
+
+### BREAKING CHANGE
+
+- dropped support for Sanity v3 and React < 19.2.4
+  EOF
+
 ## <small>1.0.1 (2025-07-08)</small>
 
 - fix: reset version to 1.0.0 for semantic-release ([a154826](https://github.com/simongowing1/sanity-plugin-image-asset-picker/commit/a154826))
