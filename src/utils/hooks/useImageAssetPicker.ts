@@ -1,4 +1,4 @@
-import {SanityAsset} from '@sanity/image-url/lib/types/types';
+import {SanityAsset} from '@sanity/image-url';
 import {FormEvent, useEffect, useMemo, useState} from 'react';
 import {FormPatch, insert, PatchEvent, setIfMissing, useClient} from 'sanity';
 
