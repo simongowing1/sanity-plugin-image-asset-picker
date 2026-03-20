@@ -1,5 +1,5 @@
 import {AddIcon} from '@sanity/icons';
-import {SanityAsset} from '@sanity/image-url/lib/types/types';
+import {SanityAsset} from '@sanity/image-url';
 import {Flex, Spinner, Text} from '@sanity/ui';
 import {Grid} from '@sanity/ui';
 import {Button} from '@sanity/ui';

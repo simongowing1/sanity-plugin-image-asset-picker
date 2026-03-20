@@ -1,4 +1,4 @@
-> This is a **Sanity Studio v3** plugin.
+> This is a **Sanity Studio v5** plugin.
 
 # Sanity Image Asset Picker
 
@@ -38,8 +38,8 @@ The plugin will register the `ImageAssetPicker` component to be used with `array
 
 ## Requirements
 
-- Sanity v3.x
-- React 18+
+- Sanity v5.x
+- React 19.2+
 
 ## Develop & test
 

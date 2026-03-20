@@ -1,4 +1,4 @@
-import {SanityAsset} from '@sanity/image-url/lib/types/types';
+import {SanityAsset} from '@sanity/image-url';
 import {Card, Checkbox, Flex, Stack, Text} from '@sanity/ui';
 
 interface ImageAssetCardProps {

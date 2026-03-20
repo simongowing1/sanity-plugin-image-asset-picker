@@ -1,4 +1,4 @@
-import {SanityAsset} from '@sanity/image-url/lib/types/types';
+import {SanityAsset} from '@sanity/image-url';
 import {Dialog, Stack} from '@sanity/ui';
 import {FormEvent} from 'react';
 
